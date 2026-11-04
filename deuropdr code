@@ -1,0 +1,72 @@
+using System;
+
+class Deur
+{
+    private bool opSlot;
+    private bool deurOpen;
+
+    public string DeurNaam { get; set; }
+
+    public Deur(string deurNaam)
+    {
+        opSlot = true;
+        deurOpen = false;
+        DeurNaam = deurNaam;
+    }
+
+    public string SleutelGebruiken(string richting)
+    {
+        switch (richting.ToLower())
+        {
+            case "links":
+                opSlot = false;
+                return "De deur is ontgrendeld.";
+
+            case "rechts":
+                opSlot = true;
+                return "De deur is vergrendeld.";
+
+            default:
+                return "Fout: draai de sleutel naar links of rechts.";
+        }
+    }
+
+    public string DeurOpenen()
+    {
+        if (opSlot)
+        {
+            return "Fout: de deur zit op slot.";
+        }
+
+        deurOpen = true;
+        return "De deur is geopend.";
+    }
+
+    public string DoorDeurLopen()
+    {
+        if (opSlot)
+        {
+            return "Fout: de deur zit op slot.";
+        }
+
+        if (!deurOpen)
+        {
+            return "Fout: de deur is niet open.";
+        }
+
+        return "Je loopt door de deur.";
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Deur voordeur = new Deur("Voordeur");
+
+        Console.WriteLine(voordeur.DoorDeurLopen());
+        Console.WriteLine(voordeur.SleutelGebruiken("links"));
+        Console.WriteLine(voordeur.DeurOpenen());
+        Console.WriteLine(voordeur.DoorDeurLopen());
+    }
+}
